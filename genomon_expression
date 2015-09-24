@@ -10,8 +10,8 @@ parser.add_argument("--version", action = "version", version = "genomon_expressi
 parser.add_argument("bam_file", metavar = "sequence.bam", default = None, type = str,
                     help = "the path to the bam file")
 
-parser.add_argument("output", metavar = "output.txt", default = None, type = str, 
-                    help = "the path to the output")
+parser.add_argument("output_prefix", metavar = "output_prefix", default = None, type = str, 
+                    help = "the prefix of the output")
 
 parser.add_argument("exon_bed", metavar = "exon.bed", default = None, type = str,
                     help = "the path to the exon info file")

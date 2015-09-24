@@ -53,17 +53,16 @@ def exon_base_count(input_file, output_file):
         else:
             exon2count[exon] = int(F[18])
 
-    for exon in exon2count:
+    for exon in sorted(exon2count):
         print >> hOUT, exon + '\t' + str(exon2count[exon])
 
     hIN.close()
     hOUT.close()
 
 
-def mapped_base_count(input_file, output_file):
+def mapped_base_count(input_file):
 
     hIN = open(input_file, 'r')
-    hOUT = open(output_file, 'w')
 
     count = 0    
     for line in hIN:
@@ -71,7 +70,6 @@ def mapped_base_count(input_file, output_file):
         count = count + int(F[9])
 
     hIN.close()
-    hOUT.close()
    
     return count
 
@@ -98,7 +96,7 @@ def ref_base_count(input_file, output_file):
         ref2count[ID] = ref2count[ID] + int(F[6])
         ref2len[ID] = ref2len[ID] + int(F[2]) - int(F[1])
 
-    for ID in ref2count:
+    for ID in sorted(ref2count):
         print >> hOUT, ID + '\t' + str(ref2count[ID]) + '\t' + str(ref2len[ID])
     
     hIN.close()
@@ -127,7 +125,7 @@ def sym_base_count(input_file, output_file):
             if F[2] > 0 and F[3] > 0 and float(F[3]) / float(F[2]) > tempV:
                 sym2exp[symbol] = F[2] + '\t' + F[3]
 
-    for symbol in sym2exp:
+    for symbol in sorted(sym2exp):
         print >> hOUT, symbol + '\t' + str(sym2exp[symbol])
 
     hIN.close() 
@@ -142,7 +140,7 @@ def sym_fkpm(input_file, output_file, mapped_base_count):
     for line in hIN:
         F = line.rstrip('\n').split('\t')
         fkpm = float(int(F[2]) + 1000 * 1000000) / float(mapped_base_count * int(F[1]))
-        print >> hOUT, F[0] + str(fkpm)
+        print >> hOUT, F[0] + '\t' + str(round(fkpm, 3))
 
     hIN.close()
     hOUT.close()
