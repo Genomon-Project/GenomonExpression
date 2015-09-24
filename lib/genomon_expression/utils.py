@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import re
 import pysam
 
 def filterImproper(input_bam, output_bam, mapq_thres):
@@ -58,4 +59,48 @@ def exon_base_count(input_file, output_file):
     hIN.close()
     hOUT.close()
 
+
+def mapped_base_count(input_file, output_file):
+
+    hIN = open(input_file, 'r')
+    hOUT = open(output_file, 'w')
+
+    count = 0    
+    for line in hIN:
+        F = line.rstrip('\n').split('\t')
+        count = count + int(F[9])
+
+    print >> hOUT, str(count)
+
+    hIN.close()
+    hOUT.close()
+   
+
+
+def ref_base_count(input_file, output_file):
+
+    hIN = open(input_file, 'r')
+    hOUT = open(output_file, 'w')
+
+    ref2count = {}
+    ref2len = {}
+
+    for line in hIN:
+        F = line.rstrip('\n').split('\t')
+
+        refID = F[3]
+        refID = re.sub(r'_\d+$', '', refID)
+        symbol = F[4]
+
+        if refID not in ref2count: ref2count[refID] = 0
+        if refID not in ref2len: ref2len[refID] = 0
+             
+        ref2count[refID] = ref2count[refID] + int(F[6])
+        ref2len[refID] = ref2len[refID] + int(F[2]) - int(F[1])
+
+    for refID in ref2count:
+        print >> hOUT, refID + '\t' + str(ref2count[refID]) + '\t' + str(ref2len[refID])
     
+    hIN.close()
+    hOUT.close()
+ 

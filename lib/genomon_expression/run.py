@@ -16,6 +16,7 @@ def main(args):
     if not os.path.exists(output_dir):
        os.makedirs(output_dir)
 
+    """
     utils.filterImproper(input_bam, output + ".filt.bam", mapq_thres)
 
     hOUT = open(output + ".filt.bed12", 'w')
@@ -29,3 +30,7 @@ def main(args):
 
     utils.exon_base_count(output + ".exon.bed", output + ".exon2base.txt")
 
+    """
+    utils.mapped_base_count(output + ".filt.bed12", output + ".mappedBaseCount.txt")
+
+    utils.ref_base_count(output + ".exon2base.txt", output + ".ref2base.txt")
