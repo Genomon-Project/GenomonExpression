@@ -60,9 +60,10 @@ def exon_base_count(input_file, output_file):
     hOUT.close()
 
 
-def mapped_base_count(input_file):
+def mapped_base_count(input_file, output_file):
 
     hIN = open(input_file, 'r')
+    hOUT = open(output_file, 'w')
 
     count = 0    
     for line in hIN:
@@ -71,7 +72,8 @@ def mapped_base_count(input_file):
 
     hIN.close()
    
-    return count
+    print >> hOUT, str(count)
+
 
 
 def ref_base_count(input_file, output_file):
@@ -132,18 +134,20 @@ def sym_base_count(input_file, output_file):
     hOUT.close()
 
 
-def sym_fkpm(input_file, output_file, mapped_base_count):
+def sym_fkpm(input_file, output_file, mapped_base_count_file):
+
+    hIN = open(mapped_base_count_file, 'r')
+    mapped_base_count = hIN.readline().rstrip('\n')
+    hIN.close()
 
     hIN = open(input_file, 'r')
     hOUT = open(output_file, 'w')
   
     for line in hIN:
         F = line.rstrip('\n').split('\t')
-        fkpm = float(int(F[2]) + 1000 * 1000000) / float(mapped_base_count * int(F[1]))
+        fkpm = float(int(F[2]) * 1000 * 1000000) / float(mapped_base_count * int(F[1]))
         print >> hOUT, F[0] + '\t' + str(round(fkpm, 3))
 
     hIN.close()
     hOUT.close()
 
-
-     

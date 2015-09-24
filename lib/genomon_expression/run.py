@@ -29,13 +29,13 @@ def main(args):
 
     utils.exon_base_count(output_prefix + ".exon.bed", output_prefix + ".exon2base.txt")
 
-    mapped_base_count = utils.mapped_base_count(output_prefix + ".filt.bed12")
+    utils.mapped_base_count(output_prefix + ".filt.bed12", output_prefix + ".mapped_base_count.txt")
 
     utils.ref_base_count(output_prefix + ".exon2base.txt", output_prefix + ".ref2base.txt")
 
     utils.sym_base_count(output_prefix + ".ref2base.txt", output_prefix + ".sym2base.txt")
 
-    utils.sym_fkpm(output_prefix + ".sym2base.txt", output_prefix + ".sym2fkpm.txt", mapped_base_count)
+    utils.sym_fkpm(output_prefix + ".sym2base.txt", output_prefix + ".sym2fkpm.txt", output_prefix + ".mapped_base_count.txt")
 
     subprocess.call(["rm", "-rf", output_prefix + ".filt.bam"])
     subprocess.call(["rm", "-rf", output_prefix + ".filt.bed12"])
