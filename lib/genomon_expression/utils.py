@@ -36,12 +36,26 @@ def filterImproper(input_bam, output_bam, mapq_thres):
         bamfile_out.write(read)
 
 
-if __name__ == "__main__":
-    import sys
-    input_bam = sys.argv[1]
-    output_bam = sys.argv[2]
-    mapq_thres = sys.argv[3]
+def exon_base_count(input_file, output_file):
 
-    filterImproper(input_bam, output_bam, int(mapq_thres))
+    exon2count = {}
+    hIN = open(input_file, 'r')
+    hOUT = open(output_file, 'w')
 
+    for line in hIN:
+        F = line.rstrip('\n').split('\t')
+        if int(F[18]) == 0: continue
 
+        exon = '\t'.join(F[12:18])
+        if exon in exon2count:
+            exon2count[exon] = exon2count[exon] + int(F[18])
+        else:
+            exon2count[exon] = int(F[18])
+
+    for exon in exon2count:
+        print >> hOUT, exon + '\t' + str(exon2count[exon])
+
+    hIN.close()
+    hOUT.close()
+
+    
