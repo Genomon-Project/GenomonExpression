@@ -34,9 +34,12 @@ python setup.py install
 ## Preparation
 
 1. Install the bedtools. 
-2. Prepare annotation file for each refseq gene and exon. The example script getting this is ***
+2. Prepare annotation file for each refseq gene and exon. The example script getting this is resource/prepGeneInfo.sh.
 
-
+```
+cd resource
+bash prepGeneInfo.sh
+```
 
 ## Commands
 
