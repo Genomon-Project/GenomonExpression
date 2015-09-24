@@ -31,6 +31,12 @@ def main(args):
     utils.exon_base_count(output + ".exon.bed", output + ".exon2base.txt")
 
     """
-    utils.mapped_base_count(output + ".filt.bed12", output + ".mappedBaseCount.txt")
+    mapped_base_count = utils.mapped_base_count(output + ".filt.bed12", output + ".mappedBaseCount.txt")
 
     utils.ref_base_count(output + ".exon2base.txt", output + ".ref2base.txt")
+
+    utils.sym_base_count(output + ".ref2base.txt", output + ".sym2base.txt")
+
+    utils.sym_fkpm(output + ".sym2base.txt", output + ".sym2fkpm.txt", mapped_base_count)
+
+
