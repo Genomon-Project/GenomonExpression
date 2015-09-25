@@ -99,7 +99,7 @@ def ref_base_count(input_file, output_file):
         ref2len[ID] = ref2len[ID] + int(F[2]) - int(F[1])
 
     for ID in sorted(ref2count):
-        print >> hOUT, ID + '\t' + str(ref2count[ID]) + '\t' + str(ref2len[ID])
+        print >> hOUT, ID + '\t' + str(ref2len[ID]) + '\t' + str(ref2count[ID])
     
     hIN.close()
     hOUT.close()
@@ -145,7 +145,7 @@ def sym_fkpm(input_file, output_file, mapped_base_count_file):
   
     for line in hIN:
         F = line.rstrip('\n').split('\t')
-        fkpm = float(int(F[2]) * 1000 * 1000000) / float(mapped_base_count * int(F[1]))
+        fkpm = float(int(F[2]) * 1000 * 1000000) / float(int(mapped_base_count) * int(F[1]))
         print >> hOUT, F[0] + '\t' + str(round(fkpm, 3))
 
     hIN.close()

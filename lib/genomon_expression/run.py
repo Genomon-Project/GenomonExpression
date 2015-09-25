@@ -13,7 +13,7 @@ def main(args):
     mapq_thres = args.q
 
     output_prefix_dir = os.path.dirname(output_prefix)
-    if not os.path.exists(output_prefix_dir):
+    if output_prefix_dir != "" and not os.path.exists(output_prefix_dir):
        os.makedirs(output_prefix_dir)
 
     utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres)
@@ -41,4 +41,3 @@ def main(args):
     subprocess.call(["rm", "-rf", output_prefix + ".filt.bed12"])
     subprocess.call(["rm", "-rf", output_prefix + ".exon.bed"])
     subprocess.call(["rm", "-rf", output_prefix + ".exon2base.txt"])
-
