@@ -68,7 +68,9 @@ def mapped_base_count(input_file, output_file):
     count = 0    
     for line in hIN:
         F = line.rstrip('\n').split('\t')
-        count = count + int(F[9])
+        temp_counts = F[10].split(',')
+        for item in temp_counts:
+            count = count + int(item)
 
     hIN.close()
    

@@ -16,6 +16,7 @@ def main(args):
     if output_prefix_dir != "" and not os.path.exists(output_prefix_dir):
        os.makedirs(output_prefix_dir)
 
+    """
     utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres)
 
     hOUT = open(output_prefix + ".filt.bed12", 'w')
@@ -26,6 +27,8 @@ def main(args):
     subprocess.call([bedtools_path + "/bedtools", "intersect", "-a", output_prefix + ".filt.bed12",
                      "-b", exon_bed, "-wao", "-bed", "-split"], stdout = hOUT)
     hOUT.close()
+    
+    """
 
     utils.exon_base_count(output_prefix + ".exon.bed", output_prefix + ".exon2base.txt")
 
@@ -37,7 +40,9 @@ def main(args):
 
     utils.sym_fkpm(output_prefix + ".sym2base.txt", output_prefix + ".sym2fkpm.txt", output_prefix + ".mapped_base_count.txt")
 
+    """
     subprocess.call(["rm", "-rf", output_prefix + ".filt.bam"])
     subprocess.call(["rm", "-rf", output_prefix + ".filt.bed12"])
     subprocess.call(["rm", "-rf", output_prefix + ".exon.bed"])
     subprocess.call(["rm", "-rf", output_prefix + ".exon2base.txt"])
+    """
