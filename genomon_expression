@@ -22,6 +22,9 @@ parser.add_argument("bedtools_path", metavar = "bedtools_path", default = None, 
 parser.add_argument("-q", metavar = "mapping_qual_thres", default='20', type=int,
                     help = "threshold for mapping quality for calculating base counts")
 
+parser.add_argument("--keep_improper_pair", action = 'store_true', default = False,
+                    help = "keep improper paired reads (activate for single end reads)")
+
 args = parser.parse_args()
 
 main(args)

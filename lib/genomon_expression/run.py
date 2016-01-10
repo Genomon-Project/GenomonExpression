@@ -11,12 +11,13 @@ def main(args):
     exon_bed = args.exon_bed
     bedtools_path = args.bedtools_path
     mapq_thres = args.q
+    keep_improper_pair = args.keep_improper_pair
 
     output_prefix_dir = os.path.dirname(output_prefix)
     if output_prefix_dir != "" and not os.path.exists(output_prefix_dir):
        os.makedirs(output_prefix_dir)
 
-    utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres)
+    utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres, keep_improper_pair)
 
     hOUT = open(output_prefix + ".filt.bed12", 'w')
     subprocess.call([bedtools_path + "/bedtools", "bamtobed", "-bed12", "-i", output_prefix + ".filt.bam"], stdout = hOUT)
