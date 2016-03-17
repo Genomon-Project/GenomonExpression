@@ -33,7 +33,7 @@ python setup.py install
 ```
 ## Preparation
 
-1. Install the bedtools. 
+1. Install the bedtools and set the path to it.
 2. Prepare annotation file for each refseq gene and exon. The example script getting this is resource/prepGeneInfo.sh.
 
 ```
@@ -44,6 +44,6 @@ bash prepGeneInfo.sh
 ## Commands
 
 ```
-genomon_expression  [-q mapping_qual_thres] sequence.bam output_prefix exon.bed bedtools_path
+genomon_expression  [-q mapping_qual_thres] sequence.bam output_prefix exon.bed
 ```
 
