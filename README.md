@@ -21,7 +21,7 @@ For those who want to get the expression values for each splicing variant, go to
 Python (>= 2.7), `pysam (>= 0.8.1)`
 
 ### Software
-bedtools
+[bedtools](http://bedtools.readthedocs.org/en/latest/])
 
 ## Install
 
