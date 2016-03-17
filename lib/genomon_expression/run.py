@@ -9,7 +9,7 @@ def main(args):
     input_bam = args.bam_file
     output_prefix = args.output_prefix
     exon_bed = args.exon_bed
-    bedtools_path = args.bedtools_path
+    # bedtools_path = args.bedtools_path
     mapq_thres = args.q
     keep_improper_pair = args.keep_improper_pair
 
@@ -20,11 +20,11 @@ def main(args):
     utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres, keep_improper_pair)
 
     hOUT = open(output_prefix + ".filt.bed12", 'w')
-    subprocess.call([bedtools_path + "/bedtools", "bamtobed", "-bed12", "-i", output_prefix + ".filt.bam"], stdout = hOUT)
+    subprocess.call(["bedtools", "bamtobed", "-bed12", "-i", output_prefix + ".filt.bam"], stdout = hOUT)
     hOUT.close()
  
     hOUT = open(output_prefix + ".exon.bed", 'w')
-    subprocess.call([bedtools_path + "/bedtools", "intersect", "-a", output_prefix + ".filt.bed12",
+    subprocess.call(["bedtools", "intersect", "-a", output_prefix + ".filt.bed12",
                      "-b", exon_bed, "-wao", "-bed", "-split"], stdout = hOUT)
     hOUT.close()
     
