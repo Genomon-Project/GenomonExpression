@@ -28,10 +28,14 @@ Python (>= 2.7), `pysam (>= 0.8.1)`
 ```
 git clone https://github.com/Genomon-Project/GenomonExpression.git
 cd GenomonExpression
-python setup.py build install 
+python setup.py build 
+python setup.py install 
 ```
 
-You may need to add --user if you are using shared environment.
+For the last command, you may need to add --user if you are using a shared computing cluster.
+```
+python setup.py install --user
+```
 
 
 ## Preparation
