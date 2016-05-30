@@ -26,11 +26,14 @@ Python (>= 2.7), `pysam (>= 0.8.1)`
 ## Install
 
 ```
-git clone https://github.com/friend1ws/GenomonExpression.git
+git clone https://github.com/Genomon-Project/GenomonExpression.git
 cd GenomonExpression
-python setup.py build
-python setup.py install
+python setup.py build install 
 ```
+
+You may need to add --user if you are using shared environment.
+
+
 ## Preparation
 
 1. Install the bedtools and set the path to it.
@@ -44,6 +47,12 @@ bash prepGeneInfo.sh
 ## Commands
 
 ```
-genomon_expression  [-q mapping_qual_thres] sequence.bam output_prefix exon.bed
+genomon_expression [-h] [--version] [-q mapping_qual_thres] [--keep_improper_pair] 
+                   sequence.bam output_prefix exon.bed
+```
+
+You can check the manual by typing
+```
+genomon_expression -h
 ```
 
