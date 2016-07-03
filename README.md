@@ -52,7 +52,7 @@ bash prepGeneInfo.sh
 
 ```
 genomon_expression [-h] [--version] [-q mapping_qual_thres] [--keep_improper_pair] 
-                   sequence.bam output_prefix exon.bed
+                   sequence.bam output_prefix exon.GRCh37.bed
 ```
 
 You can check the manual by typing
