@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='genomon_expression',
-      version='0.1.0',
+      version='0.2.0',
       description='Python tools for calculating fkpm values from rna-seq',
       author='Yuichi Shiraishi',
       author_email='friend1ws@gamil.com',
