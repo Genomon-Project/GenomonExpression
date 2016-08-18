@@ -28,13 +28,12 @@ Python (>= 2.7), `pysam (>= 0.8.1)`
 ```
 git clone https://github.com/Genomon-Project/GenomonExpression.git
 cd GenomonExpression
-python setup.py build 
-python setup.py install 
+python setup.py build install
 ```
 
 For the last command, you may need to add --user if you are using a shared computing cluster.
 ```
-python setup.py install --user
+python setup.py build install --user
 ```
 
 
@@ -47,12 +46,14 @@ python setup.py install --user
 cd resource
 bash prepGeneInfo.sh
 ```
+After that, you will find  `exon.hg19.bed` and `exon.GRCh37.bed` files, that are reference gene information file for
+UCSC based hg19 reference genome and GRCh37 based reference genome, respectively.
 
 ## Commands
 
 ```
 genomon_expression [-h] [--version] [-q mapping_qual_thres] [--keep_improper_pair] 
-                   sequence.bam output_prefix exon.GRCh37.bed
+                   sequence.bam output_prefix resource/exon.GRCh37.bed
 ```
 
 You can check the manual by typing
@@ -60,3 +61,6 @@ You can check the manual by typing
 genomon_expression -h
 ```
 
+## Results
+
+The primary result is ${output_prefix}.sym2fkpm.txt, in which the first column is the gene symbol and the second column is the FKPM value.
