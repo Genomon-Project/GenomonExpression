@@ -18,7 +18,7 @@ For those who want to get the expression values for each splicing variant, go to
 ## Dependency
 
 ### Python
-Python (>= 2.7), `pysam (>= 0.8.1)`
+Python (>= 2.7), `pysam (>= 0.8.1)`, [annot_utils](https://github.com/friend1ws/annot_utils)
 
 ### Software
 [bedtools](http://bedtools.readthedocs.org/en/latest/])
@@ -40,20 +40,17 @@ python setup.py build install --user
 ## Preparation
 
 1. Install the bedtools and set the path to it.
-2. Prepare annotation file for each refseq gene and exon. The example script getting this is resource/prepGeneInfo.sh.
+2. Install [annot_utils](https://github.com/friend1ws/annot_utils)
 
-```
-cd resource
-bash prepGeneInfo.sh
-```
-After that, you will find  `exon.hg19.bed` and `exon.GRCh37.bed` files, that are reference gene information file for
-UCSC based hg19 reference genome and GRCh37 based reference genome, respectively.
 
 ## Commands
 
 ```
-genomon_expression [-h] [--version] [-q mapping_qual_thres] [--keep_improper_pair] 
-                   sequence.bam output_prefix resource/exon.GRCh37.bed
+genomon_expression [-h] [--version] [--grc]
+                        [--genome_id {hg19,hg38,mm10}]
+                        [-q mapping_qual_thres] [--keep_improper_pair]
+                        [--debug]
+                        sequence.bam output_prefix
 ```
 
 You can check the manual by typing
