@@ -20,7 +20,7 @@ for line in hIN:
     F = line.rstrip('\n').split('\t')
 
     if F[2] not in hg2grch: 
-        print >> sys.stderr, "no chr name in GRCh37 assembly file"
+        print >> sys.stderr, F[2] + ": no chr name in GRCh37 assembly file"
         sys.exit(1)
 
     chr = hg2grch[F[2]]

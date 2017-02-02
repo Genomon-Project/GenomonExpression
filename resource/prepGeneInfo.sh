@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
-rm -rf GCF_000001405.13.assembly.txt
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/All/GCF_000001405.13.assembly.txt
+# rm -rf GCF_000001405.13.assembly.txt
+# wget ftp://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/All/GCF_000001405.13.assembly.txt
 
 rm -rf refGene.txt.gz
 echo "wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/refGene.txt.gz"

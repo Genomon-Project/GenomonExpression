@@ -1,7 +1,11 @@
 #! /usr/bin/env python
 
-import re
+import re, gzip
 import pysam
+
+re_refID =re.compile(r'\((N[MR]_\d+)\)')
+
+
 
 def filterImproper(input_bam, output_bam, mapq_thres, keep_improper_pair):
 
@@ -78,30 +82,48 @@ def mapped_base_count(input_file, output_file):
 
 
 
-def ref_base_count(input_file, output_file):
+def ref_base_count(input_file, output_file, ref_exon_file):
+
+
+    ref2len = {}
+    with gzip.open(ref_exon_file, 'r') as hin:
+        for line in hin:
+            F = line.rstrip('\n').split('\t')
+            refID_match = re_refID.search(F[3])
+            refID = refID_match.group(1)
+
+            if refID not in ref2len: ref2len[refID] = 0
+            ref2len[refID] = ref2len[refID] + int(F[2]) - int(F[1])
+
+
 
     hIN = open(input_file, 'r')
     hOUT = open(output_file, 'w')
 
     ref2count = {}
-    ref2len = {}
+    # ref2len = {}
 
     for line in hIN:
         F = line.rstrip('\n').split('\t')
 
-        refID = F[3]
-        refID = re.sub(r'_\d+$', '', refID)
-        symbol = F[4]
+        refID_match = re_refID.search(F[3])
+        refID = refID_match.group(1)
+        symbol = re_refID.sub('', F[3])
+ 
+        # refID = F[3]
+        # refID = re.sub(r'_\d+$', '', refID)
+        # symbol = F[4]
         ID = refID + '\t' + symbol
 
         if ID not in ref2count: ref2count[ID] = 0
         if ID not in ref2len: ref2len[ID] = 0
              
         ref2count[ID] = ref2count[ID] + int(F[6])
-        ref2len[ID] = ref2len[ID] + int(F[2]) - int(F[1])
+        # ref2len[ID] = ref2len[ID] + int(F[2]) - int(F[1])
 
     for ID in sorted(ref2count):
-        print >> hOUT, ID + '\t' + str(ref2len[ID]) + '\t' + str(ref2count[ID])
+        refID, symbol = ID.split('\t')
+        print >> hOUT, ID + '\t' + str(ref2len[refID]) + '\t' + str(ref2count[ID])
     
     hIN.close()
     hOUT.close()
