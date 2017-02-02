@@ -66,19 +66,26 @@ def exon_base_count(input_file, output_file):
 
 def mapped_base_count(input_file, output_file):
 
-    hIN = open(input_file, 'r')
-    hOUT = open(output_file, 'w')
+    count = 0
+    tempID = ""
+    with open(input_file, 'r') as hin:
+        for line in hin:
+            F = line.rstrip('\n').split('\t')
+            if F[3] != tempID:
+                if tempID != "":
+                    for i in range(len(temp_counts) - 1):
+                        count = count + int(temp_counts[i])
+                tempID = F[3]
 
-    count = 0    
-    for line in hIN:
-        F = line.rstrip('\n').split('\t')
-        temp_counts = F[10].split(',')
-        for item in temp_counts:
-            count = count + int(item)
+            temp_counts = F[10].split(',')
 
-    hIN.close()
-   
-    print >> hOUT, str(count)
+    for i in range(len(temp_counts) - 1):
+        count = count + int(temp_counts[i])
+
+
+    hout = open(output_file, 'w')
+    print >> hout, str(count)
+    hout.close()
 
 
 

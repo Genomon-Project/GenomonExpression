@@ -19,21 +19,18 @@ def main(args):
     if output_prefix_dir != "" and not os.path.exists(output_prefix_dir):
        os.makedirs(output_prefix_dir)
 
+    annot_utils.exon.make_exon_info(output_prefix + ".refExon.bed.gz", "refseq", args.genome_id, args.grc, True)
     
     utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres, keep_improper_pair)
 
-    hOUT = open(output_prefix + ".filt.bed12", 'w')
-    subprocess.call(["bedtools", "bamtobed", "-bed12", "-i", output_prefix + ".filt.bam"], stdout = hOUT)
-    hOUT.close()
+    hout = open(output_prefix + ".exon.bed", 'w')
+    subprocess.call(["bedtools", "intersect", "-abam", output_prefix + ".filt.bam",
+                     "-b", output_prefix + ".refExon.bed.gz", "-wao", "-bed", "-split"], stdout = hout)
+    hout.close()                
  
-    hOUT = open(output_prefix + ".exon.bed", 'w')
-    subprocess.call(["bedtools", "intersect", "-a", output_prefix + ".filt.bed12",
-                     "-b", output_prefix + ".refExon.bed.gz", "-wao", "-bed", "-split"], stdout = hOUT)
-    hOUT.close()
-
     utils.exon_base_count(output_prefix + ".exon.bed", output_prefix + ".exon2base.txt")
 
-    utils.mapped_base_count(output_prefix + ".filt.bed12", output_prefix + ".mapped_base_count.txt")
+    utils.mapped_base_count(output_prefix + ".exon.bed", output_prefix + ".mapped_base_count.txt")
 
     utils.ref_base_count(output_prefix + ".exon2base.txt", output_prefix + ".ref2base.txt", output_prefix + ".refExon.bed.gz")
 
