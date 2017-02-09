@@ -36,7 +36,7 @@ def main(args):
 
     utils.sym_base_count(output_prefix + ".ref2base.txt", output_prefix + ".sym2base.txt")
 
-    utils.sym_fkpm(output_prefix + ".sym2base.txt", output_prefix + ".sym2fkpm.txt", output_prefix + ".mapped_base_count.txt")
+    utils.sym_fkpm(output_prefix + ".sym2base.txt", output_prefix + ".sym2fpkm.txt", output_prefix + ".mapped_base_count.txt")
 
     if not args.debug:
         subprocess.call(["rm", "-rf", output_prefix + ".refExon.bed.gz"])
