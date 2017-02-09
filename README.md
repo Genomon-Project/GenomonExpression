@@ -10,7 +10,7 @@ from rna sequencing data. The procedure is as follows:
 2. For each specified exon, calculate the aligned bases.
 3. For each refseq gene, calculate the aligned bases. 
 4. For each gene symbol, get the associated refseq genes with maximum mapped bases divided by region size.
-5. Derive FKPM value for each gene symbol.
+5. Derive FPKM value for each gene symbol.
 
 Note that this software is just for obtaining gene symbol bases expression values.
 For those who want to get the expression values for each splicing variant, go to cufflinks, kallisto, salmon and so on.
@@ -60,4 +60,4 @@ genomon_expression -h
 
 ## Results
 
-The primary result is ${output_prefix}.sym2fkpm.txt, in which the first column is the gene symbol and the second column is the FKPM value.
+The primary result is ${output_prefix}.sym2fkpm.txt, in which the first column is the gene symbol and the second column is the FPKM value.
