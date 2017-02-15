@@ -24,7 +24,7 @@ def main(args):
     utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres, keep_improper_pair)
 
     hout = open(output_prefix + ".exon.bed", 'w')
-    subprocess.call(["bedtools", "intersect", "-abam", output_prefix + ".filt.bam",
+    subprocess.check_call(["bedtools", "intersect", "-abam", output_prefix + ".filt.bam",
                      "-b", output_prefix + ".refExon.bed.gz", "-wao", "-bed", "-split"], stdout = hout)
     hout.close()                
  
@@ -39,10 +39,10 @@ def main(args):
     utils.sym_fkpm(output_prefix + ".sym2base.txt", output_prefix + ".sym2fpkm.txt", output_prefix + ".mapped_base_count.txt")
 
     if not args.debug:
-        subprocess.call(["rm", "-rf", output_prefix + ".refExon.bed.gz"])
-        subprocess.call(["rm", "-rf", output_prefix + ".refExon.bed.gz.tbi"])
-        subprocess.call(["rm", "-rf", output_prefix + ".filt.bam"])
-        subprocess.call(["rm", "-rf", output_prefix + ".filt.bed12"])
-        subprocess.call(["rm", "-rf", output_prefix + ".exon.bed"])
-        subprocess.call(["rm", "-rf", output_prefix + ".exon2base.txt"])
+        subprocess.check_call(["rm", "-rf", output_prefix + ".refExon.bed.gz"])
+        subprocess.check_call(["rm", "-rf", output_prefix + ".refExon.bed.gz.tbi"])
+        subprocess.check_call(["rm", "-rf", output_prefix + ".filt.bam"])
+        subprocess.check_call(["rm", "-rf", output_prefix + ".filt.bed12"])
+        subprocess.check_call(["rm", "-rf", output_prefix + ".exon.bed"])
+        subprocess.check_call(["rm", "-rf", output_prefix + ".exon2base.txt"])
 
