@@ -6,12 +6,10 @@ import utils
 import annot_utils.exon
 
 
-def main(args):
+def expression_main(args):
 
     input_bam = args.bam_file
     output_prefix = args.output_prefix
-    # exon_bed = args.exon_bed
-    # bedtools_path = args.bedtools_path
     mapq_thres = args.q
     keep_improper_pair = args.keep_improper_pair
 
