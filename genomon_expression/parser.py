@@ -7,7 +7,7 @@ def create_parser():
 
     parser = argparse.ArgumentParser(prog = "genomon_expression")
 
-    parser.add_argument("--version", action = "version", version = "genomon_expression-0.4.0b1")
+    parser.add_argument("--version", action = "version", version = "genomon_expression-0.4.0")
 
     parser.add_argument("bam_file", metavar = "sequence.bam", default = None, type = str,
                         help = "the path to the bam file")

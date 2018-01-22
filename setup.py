@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name = 'genomon_expression',
-    version = '0.4.0b1',
+    version = '0.4.0',
     description='Python tools for calculating fkpm values from RNA-seq',
     url = 'https://github.com/Genomon-Project/GenomonExpression.git',
     author = 'Yuichi Shiraishi',
