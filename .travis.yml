@@ -1,0 +1,12 @@
+language: python
+python:
+  - "2.7"
+before_script:
+  - wget https://github.com/arq5x/bedtools2/releases/download/v2.25.0/bedtools-2.25.0.tar.gz
+  - tar zxvf bedtools-2.25.0.tar.gz
+  - cd bedtools2 && make && export PATH=$PATH:$PWD/bin && cd ..
+  - pip install annot_utils
+
+script:
+  - pip install .
+  - python setup.py test 
