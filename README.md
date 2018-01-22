@@ -1,4 +1,8 @@
 # GenomonExpression
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Build Status](https://travis-ci.org/Genomon-Project/GenomonExpression.svg?branch=devel)](https://travis-ci.org/Genomon-Project/GenomonExpression)
+
 python script for calculating expression values from RNA-seq
 
 ## Introduction
