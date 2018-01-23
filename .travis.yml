@@ -9,7 +9,7 @@ before_script:
   - tar zxvf bedtools-2.25.0.tar.gz
   - cd bedtools2 && make && export PATH=$PATH:$PWD/bin && cd ..
   - pip install annot_utils
-  - pip pinstall pysam
+  - pip install pysam
 
 script:
   - pip install .
