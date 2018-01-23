@@ -22,7 +22,7 @@ For those who want to get the expression values for each splicing variant, go to
 ## Dependency
 
 ### Python
-Python (>= 2.7), `pysam (>= 0.8.1)`, [annot_utils](https://github.com/friend1ws/annot_utils)
+Python (>= 2.7), pysam, [annot_utils](https://github.com/friend1ws/annot_utils)
 
 ### Software
 [bedtools](http://bedtools.readthedocs.org/en/latest/])
@@ -30,14 +30,12 @@ Python (>= 2.7), `pysam (>= 0.8.1)`, [annot_utils](https://github.com/friend1ws/
 ## Install
 
 ```
-git clone https://github.com/Genomon-Project/GenomonExpression.git
-cd GenomonExpression
-python setup.py build install
+pip install genomon_expression
 ```
 
 For the last command, you may need to add --user if you are using a shared computing cluster.
 ```
-python setup.py build install --user
+pip install genomon_expression --user
 ```
 
 
