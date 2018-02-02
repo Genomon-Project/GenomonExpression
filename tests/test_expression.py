@@ -4,7 +4,7 @@ import unittest
 import os, tempfile, shutil, filecmp
 import genomon_expression
 
-class TestSimpleCount(unittest.TestCase):
+class TestMain(unittest.TestCase):
 
     def setUp(self):
         self.parser = genomon_expression.parser.create_parser()
