@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import re, gzip
 import pysam
 
@@ -58,7 +59,7 @@ def exon_base_count(input_file, output_file):
             exon2count[exon] = int(F[18])
 
     for exon in sorted(exon2count):
-        print >> hOUT, exon + '\t' + str(exon2count[exon])
+        print(exon + '\t' + str(exon2count[exon]), file = hOUT)
 
     hIN.close()
     hOUT.close()
@@ -84,7 +85,7 @@ def mapped_base_count(input_file, output_file):
 
 
     hout = open(output_file, 'w')
-    print >> hout, str(count)
+    print(str(count), file = hout)
     hout.close()
 
 
@@ -93,7 +94,7 @@ def ref_base_count(input_file, output_file, ref_exon_file):
 
 
     ref2len = {}
-    with gzip.open(ref_exon_file, 'r') as hin:
+    with gzip.open(ref_exon_file, 'rt') as hin:
         for line in hin:
             F = line.rstrip('\n').split('\t')
             refID_match = re_refID.search(F[3])
@@ -130,7 +131,7 @@ def ref_base_count(input_file, output_file, ref_exon_file):
 
     for ID in sorted(ref2count):
         refID, symbol = ID.split('\t')
-        print >> hOUT, ID + '\t' + str(ref2len[refID]) + '\t' + str(ref2count[ID])
+        print(ID + '\t' + str(ref2len[refID]) + '\t' + str(ref2count[ID]), file = hOUT)
     
     hIN.close()
     hOUT.close()
@@ -147,7 +148,7 @@ def sym_base_count(input_file, output_file):
         symbol = F[1]
 
         if symbol not in sym2exp:
-            if F[2] > 0 and F[3] > 0:
+            if float(F[2]) > 0.0 and float(F[3]) > 0.0:
                 sym2exp[symbol] = F[2] + '\t' + F[3]
 
         else:
@@ -155,11 +156,11 @@ def sym_base_count(input_file, output_file):
             temp = sym2exp[symbol].split('\t')
             tempV = float(temp[1]) / float(temp[0])
 
-            if F[2] > 0 and F[3] > 0 and float(F[3]) / float(F[2]) > tempV:
+            if float(F[2]) > 0.0 and float(F[3]) > 0.0 and float(F[3]) / float(F[2]) > tempV:
                 sym2exp[symbol] = F[2] + '\t' + F[3]
 
     for symbol in sorted(sym2exp):
-        print >> hOUT, symbol + '\t' + str(sym2exp[symbol])
+        print(symbol + '\t' + str(sym2exp[symbol]), file = hOUT)
 
     hIN.close() 
     hOUT.close()
@@ -177,7 +178,7 @@ def sym_fkpm(input_file, output_file, mapped_base_count_file):
     for line in hIN:
         F = line.rstrip('\n').split('\t')
         fkpm = float(int(F[2]) * 1000 * 1000000) / float(int(mapped_base_count) * int(F[1]))
-        print >> hOUT, F[0] + '\t' + str(round(fkpm, 3))
+        print(F[0] + '\t' + str(round(fkpm, 3)), file = hOUT)
 
     hIN.close()
     hOUT.close()

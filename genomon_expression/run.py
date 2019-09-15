@@ -2,7 +2,7 @@
 
 import os
 import subprocess
-import utils
+from . import utils
 import annot_utils.exon
 
 
