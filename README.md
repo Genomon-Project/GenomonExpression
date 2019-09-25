@@ -22,7 +22,7 @@ For those who want to get the expression values for each splicing variant, go to
 ## Dependency
 
 ### Python
-Python (>= 2.7), pysam, [annot_utils](https://github.com/friend1ws/annot_utils)
+Python (>= 2.7, 3.6, 3.7), pysam, [annot_utils](https://github.com/friend1ws/annot_utils)
 
 ### Software
 [bedtools](http://bedtools.readthedocs.org/en/latest/])
