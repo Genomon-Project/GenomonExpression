@@ -25,7 +25,7 @@ class TestMain(unittest.TestCase):
         genomon_expression.run.expression_main(args)
 
         self.assertTrue(filecmp.cmp(output_file, answer_file, shallow=False))
-        shutil.rmtree(tmp_dir)
+        # shutil.rmtree(tmp_dir)
 
 if __name__ == "__main__":
     unittest.main()

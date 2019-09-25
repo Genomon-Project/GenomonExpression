@@ -42,7 +42,7 @@ def filterImproper(input_bam, output_bam, mapq_thres, keep_improper_pair):
         bamfile_out.write(read)
 
 
-def exon_base_count(input_file, output_file):
+def exon_base_count(input_file, output_file, mapq_thres): 
 
     exon2count = {}
     hIN = open(input_file, 'r')
@@ -50,6 +50,7 @@ def exon_base_count(input_file, output_file):
 
     for line in hIN:
         F = line.rstrip('\n').split('\t')
+        if int(F[4]) < mapq_thres: continue
         if int(F[18]) == 0: continue
 
         exon = '\t'.join(F[12:18])
@@ -65,24 +66,24 @@ def exon_base_count(input_file, output_file):
     hOUT.close()
 
 
-def mapped_base_count(input_file, output_file):
+def mapped_base_count(input_file, output_file, mapq_thres):
 
     count = 0
     tempID = ""
     with open(input_file, 'r') as hin:
         for line in hin:
             F = line.rstrip('\n').split('\t')
+            if int(F[4]) < mapq_thres: continue
             if F[3] != tempID:
                 if tempID != "":
                     for i in range(len(temp_counts) - 1):
                         count = count + int(temp_counts[i])
                 tempID = F[3]
-
+        
             temp_counts = F[10].split(',')
-
+    
     for i in range(len(temp_counts) - 1):
         count = count + int(temp_counts[i])
-
 
     hout = open(output_file, 'w')
     print(str(count), file = hout)
