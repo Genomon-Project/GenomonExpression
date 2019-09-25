@@ -7,8 +7,8 @@ import pysam
 re_refID =re.compile(r'\((N[MR]_\d+)\)')
 
 
-
-def filterImproper(input_bam, output_bam, mapq_thres, keep_improper_pair):
+def filterImproper(input_bam, output_bam, keep_improper_pair):
+# def filterImproper(input_bam, output_bam, mapq_thres, keep_improper_pair):
 
     """
     This function is used for filtering short read with improper pairs,
@@ -35,9 +35,10 @@ def filterImproper(input_bam, output_bam, mapq_thres, keep_improper_pair):
         # skip duplicated reads
         if flags[10] == "1": continue
 
+        """
         # skip if below the minimum mapping quality
         if (read.mapq < mapq_thres): continue
-
+        """
 
         bamfile_out.write(read)
 

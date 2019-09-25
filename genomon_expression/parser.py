@@ -27,6 +27,10 @@ def create_parser():
     parser.add_argument("--keep_improper_pair", action = 'store_true', default = False,
                         help = "keep improper paired reads (activate for single end reads)")
 
+    parser.add_argument("--skip_bam_filt", action = 'store_true', default = False,
+                        help = "Skip the bam filtering step where improer pairs, duplicated reads and supplementary reads are removed (default: %(default)s)")
+
+
     parser.add_argument("--debug", default = False, action = 'store_true', help = "keep intermediate files")
 
     return parser

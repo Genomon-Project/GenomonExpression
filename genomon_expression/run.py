@@ -18,14 +18,18 @@ def expression_main(args):
        os.makedirs(output_prefix_dir)
 
     annot_utils.exon.make_exon_info(output_prefix + ".refExon.bed.gz", "refseq", args.genome_id, args.grc, True)
-    
-    # utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres, keep_improper_pair)
-    utils.filterImproper(input_bam, output_prefix + ".filt.bam", -1, keep_improper_pair) 
 
+    if not args.skip_bam_filt:    
+    # utils.filterImproper(input_bam, output_prefix + ".filt.bam", mapq_thres, keep_improper_pair)
+        utils.filterImproper(input_bam, output_prefix + ".filt.bam", keep_improper_pair) 
+
+
+    intersect_abam = input_bam if args.skip_bam_filt else output_prefix + ".filt.bam"
     hout = open(output_prefix + ".exon.bed", 'w')
-    subprocess.check_call(["bedtools", "intersect", "-abam", output_prefix + ".filt.bam",
+    subprocess.check_call(["bedtools", "intersect", "-a", intersect_abam,
                      "-b", output_prefix + ".refExon.bed.gz", "-wao", "-bed", "-split"], stdout = hout)
     hout.close()                
+
  
     utils.exon_base_count(output_prefix + ".exon.bed", output_prefix + ".exon2base.txt", mapq_thres)
 
